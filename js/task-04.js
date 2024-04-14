@@ -1,24 +1,22 @@
-// Лічильник складається зі спану і кнопок, які по кліку повинні 
-// збільшувати і зменшувати його значення на одиницю.
-// <div id="counter">  <button type="button" data-action="decrement">-1</button>  
-{/* <span id="value">0</span>  <button type="button" data-action="increment">+1</button></div> */}
-// 	•	Створи змінну counterValue, в якій буде зберігатися поточне значення лічильника 
-// та ініціалізуй її значенням 0.
-// 	•	Додай слухачів кліків до кнопок, всередині яких збільшуй або зменшуй значення лічильника.
-// 	•	Оновлюй інтерфейс новим значенням змінної counterValue.
+const form = document.querySelector(".login-form");
 
-const decrement = document.querySelector('button[data-action="decrement"]');
-const increment = document.querySelector('button[data-action="increment"]');
-const span = document.querySelector('#value');
+const onFormSubmit = (event) => {
+  event.preventDefault();
+  const formEl = event.currentTarget.elements;
+  const info = {
+    email: formEl.email.value.trim(),
+    password: formEl.password.value.trim(),
+  };
 
-let counterValue = 0;
-decrement.addEventListener('click', handlerDecrement)
-function handlerDecrement(){
-    counterValue -= 1
-    span.textContent = counterValue
-}
-increment.addEventListener('click', handlerIncrement)
-function handlerIncrement(){
-    counterValue += 1
-    span.textContent = counterValue
-}
+  if (info.email === "" || info.password === "") {
+    alert("All form fields must be filled in");
+    return;
+  } else {
+    formEl.email.value = "";
+    formEl.password.value = "";
+  }
+
+  console.log(info);
+};
+
+form.addEventListener("submit", onFormSubmit);

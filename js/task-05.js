@@ -1,17 +1,18 @@
-// Напиши скрипт, який під час набору тексту в інпуті input#name-input (подія input),
-//  підставляє його поточне значення в span#name-output. Якщо інпут порожній, у спані 
-//  повинен відображатися рядок "Anonymous".
-// <input type="text" id="name-input" placeholder="Please enter your name" />
-// <h1>Hello, <span id="name-output">Anonymous</span>!</h1>
-
-const nameInput = document.querySelector("#name-input");
-const nameOutput = document.querySelector("#name-output");
-
-nameInput.addEventListener("input",handler);
-function handler(){
-    nameOutput.textContent = nameInput.value;
-    if(!nameInput.value){
-        nameOutput.textContent = 'Anonymous'
-    }
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
 }
+
+const background = document.querySelector("body");
+const text = document.querySelector(".color");
+const btn = document.querySelector(".change-color");
+
+function handleClick() {
+  const randomColor = getRandomHexColor();
+  background.style.backgroundColor = `${randomColor}`;
+  text.textContent = `${randomColor}`;
+}
+
+btn.addEventListener("click", handleClick);
 

@@ -1,21 +1,38 @@
-// Напиши скрипт, який під час втрати фокусу на інпуті 
-// (подія blur), перевіряє його вміст щодо правильної кількості введених символів.
-// <input  type="text"  id="validation-input"  data-length="6"  
-// 55placeholder="Please enter 6 symbols"/>
-// 	•	Яка кількість символів повинна бути в інпуті, 
-//     зазначається в його атрибуті data-length.
-// 	•	Якщо введена правильна кількість символів, то border інпуту стає зеленим,
-//     якщо неправильна кількість - червоним.
-// Для додавання стилів використовуй CSS-класи valid і invalid, 
-// які ми вже додали у вихідні файли завдання.
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
+}
 
-const input = document.querySelector('#validation-input');
+const controls = document.querySelector("#controls");
+const input = controls.querySelector("input");
+const createBtn = controls.querySelector("[data-create]");
+const destroyBtn = controls.querySelector("[data-destroy]");
+const boxes = document.querySelector("#boxes");
+const fragment = document.createDocumentFragment();
 
-input.addEventListener('blur', handler);
-function handler(evt){
-    if(evt.currentTarget.value.length.toString() === input.getAttribute('data-length').toString()){
-        input.classList.add('valid');
-    } else {
-        input.classList.add('invalid');
-    }
+createBtn.addEventListener("click", createBoxes);
+destroyBtn.addEventListener("click", destroyBoxes);
+
+function createBoxes() {
+  const boxesQuant = input.value;
+  destroyBoxes();
+  let boxSize = 30;
+
+  for (let i = 0; i < boxesQuant; i++) {
+    const div = document.createElement("div");
+    div.style.width = `${boxSize}px`;
+    div.style.height = `${boxSize}px`;
+    div.style.backgroundColor = getRandomHexColor();
+    fragment.appendChild(div);
+    boxSize += 10;
+  }
+
+
+  boxes.appendChild(fragment);
+  input.value = "";
+}
+
+function destroyBoxes() {
+  boxes.innerHTML = "";
 }
