@@ -1,9 +1,3 @@
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, 0)}`;
-}
-
 const controls = document.querySelector("#controls");
 const input = controls.querySelector("input");
 const createBtn = controls.querySelector("[data-create]");
@@ -13,7 +7,11 @@ const fragment = document.createDocumentFragment();
 
 createBtn.addEventListener("click", createBoxes);
 destroyBtn.addEventListener("click", destroyBoxes);
-
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
+}
 function createBoxes() {
   const boxesQuant = input.value;
   destroyBoxes();

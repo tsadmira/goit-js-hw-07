@@ -7,4 +7,3 @@ document.addEventListener("DOMContentLoaded", function () {
     nameOutput.textContent = trimmedValue || "Anonymous";
   });
 });
-
